@@ -20,9 +20,9 @@ const ImageUpload = ({ username }) => {
 
     const handleUpload = (e) => {
         console.log('Upload');
+        uploadPost(image, caption, username, setProgress);
         setCaption("");
         setImage(null);
-        uploadPost(image, caption, username, setProgress);
     }
 
     return (

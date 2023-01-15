@@ -38,7 +38,7 @@ function App() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
@@ -47,8 +47,9 @@ function App() {
         console.log(authUser);
         setUser(authUser);
 
-        if (!authUser.displayName) {
+        if (authUser.displayName == null) {
           // user was just created hence no username
+          console.log(`displayName is ${authUser.displayName}`);
           return updateProfile(authUser, {
             displayName: username,
           });
@@ -74,11 +75,11 @@ function App() {
     }
     getPosts();
 
-  });
+  }, []);
 
   const signUp = async (e) => {
     e.preventDefault();
-    const res = await registerWithEmailAndPassword(email, password);
+    const res = await registerWithEmailAndPassword(username, email, password);
     console.log(res);
     setUsername('');
     setEmail('');
@@ -101,10 +102,10 @@ function App() {
         open={openSignUp}
         onClose={() => setOpenSignUp(false)}
       >
-        <Box sx={style}>
+        <Box sx={style} className='app__signup'>
           <form action="" className='app__signup'>
             <center>
-              <img className='app_headerImage' src="https://www.gstatic.com/mobilesdk/160503_mobilesdk/logo/2x/firebase_28dp.png" alt="App-logo" />
+              <img className='app__signUpLogo' src={logo} alt="App-logo" />
             </center>
             <h1>Create New Account</h1>
             <p onClick={() => { console.log('Sign In') }}>Or Sign in into your existing Account</p>
@@ -140,10 +141,10 @@ function App() {
         open={openSignIn}
         onClose={() => setOpenSignIn(false)}
       >
-        <Box sx={style}>
+        <Box sx={style} className='app__signup'>
           <form action="" className='app__signup'>
             <center>
-              <img className='app_headerImage' src="https://www.gstatic.com/mobilesdk/160503_mobilesdk/logo/2x/firebase_28dp.png" alt="App-logo" />
+              <img className='app__signUpLogo' src={logo} alt="App-logo" />
             </center>
             <h1>Sign into existing Account</h1>
             <p onClick={() => { console.log('Sign up') }}>Or Sign Up for a new Account</p>
@@ -190,6 +191,7 @@ function App() {
           : (
             <div>
               <h3>Login to Upload Posts</h3>
+              <p>For new accounts this feature will be enabled after your next Login</p>
             </div>
           )
         }

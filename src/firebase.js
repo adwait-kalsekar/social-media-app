@@ -19,13 +19,13 @@ import {
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAmeB6NJrehMZVjUIAxUJ9_VWTy6NXkahA",
-    authDomain: "social-media-app-14f35.firebaseapp.com",
-    projectId: "social-media-app-14f35",
-    storageBucket: "social-media-app-14f35.appspot.com",
-    messagingSenderId: "249413655145",
-    appId: "1:249413655145:web:94bd33131b6947711560f8",
-    measurementId: "G-DTZ4F0DV08"
+    apiKey: "AIzaSyAyKQHI04bseEDsBuVLyDHyAqhZfPXH5NM",
+    authDomain: "social-media-app-6a63c.firebaseapp.com",
+    projectId: "social-media-app-6a63c",
+    storageBucket: "social-media-app-6a63c.appspot.com",
+    messagingSenderId: "352917666928",
+    appId: "1:352917666928:web:155ee54baa0481842ec8b5",
+    measurementId: "G-ZKDQHNGRXZ"
 };
 
 const firebaseApp = initializeApp(firebaseConfig);
@@ -71,6 +71,8 @@ const uploadPost = (image, caption, username, setProgress) => {
         (error) => {
             // Handle unsuccessful uploads
             console.log(error);
+            alert(error.message);
+            window.location.reload();
         },
         () => {
             // Handle successful uploads on complete
@@ -83,18 +85,20 @@ const uploadPost = (image, caption, username, setProgress) => {
                     username: username,
                 });
                 console.log("Document written with ID: ", docRef.id);
+                setProgress(0);
+                window.location.reload();
             });
-            setProgress(0);
         },
     );
 }
 
-const registerWithEmailAndPassword = async (email, password) => {
+const registerWithEmailAndPassword = async (username, email, password) => {
     try {
         const res = await createUserWithEmailAndPassword(auth, email, password);
         return res;
     } catch (err) {
         console.log(err.message);
+        alert(err.message);
         return err;
     }
 };
@@ -105,6 +109,7 @@ const logInWithEmailAndPassword = async (email, password) => {
         return res;
     } catch (err) {
         console.error(err.message);
+        alert(err.message);
         return err;
     }
 };

@@ -27,7 +27,7 @@
 .app__headerImage {
   object-fit: contain;
   height: 50px;
-  width: 50;
+  width: 50px;
 }
 
 .app__headerButtons {
@@ -50,9 +50,29 @@
   border: 1px solid #5c98dd;
 }
 
+.app__signUpLogo {
+  height: 50px;
+  width: 50px;
+}
+
 .app__imageUpload {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  text-align: center;
+}
+
+@media (max-width: 480px) {
+  .app__signup {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .app__signin {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
 }
